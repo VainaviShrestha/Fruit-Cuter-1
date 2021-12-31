@@ -37,47 +37,50 @@ class Game{
     
     play(){
         
-                form.hide();
+    form.hide();
 
-                Player.getPlayerInfo();
-                player.getPlayerAtEnd();
-                 image(back_img, 0, 0, 1000, 800);
-                 var x =100;
-                 var y=200;
-                 var index =0;
-                 drawSprites();
-                 for(var plr in allPlayers){
-                    
-                    
-                     index = index+1;
-                     x = 500-allPlayers[plr].distance;
-                     y=500;
-                     
-                     players[index -1].x = x;
-                     players[index - 1].y = y;
-                       
-                     if(index === player.index){
-                         
-                         fill("black");
-                         textSize(25);
-                         text(allPlayers[plr].name ,x-25,y+25);
-
-                         
-                     }
-                    
-                         textSize(25);
-                         fill("white");
-                         text("Player 1 :" +allPlayers.player1.score,50,50);
-                        text("Player 2 :" + allPlayers.player2.score, 50, 100);
+    Player.getPlayerInfo();
+//Call the getPlayerAtEnd() function in the play() function of game.js.
+player.getPlayerAtEnd();
+image(back_img, 0, 0, 1000, 800);
+var x =100;
+var y=200;
+var index =0;
+drawSprites();
                  
-                 }
+for(var plr in allPlayers){
+index = index+1;
+x = 500-allPlayers[plr].distance;
+y=500;
+                     
+players[index -1].x = x;
+players[index - 1].y = y;
+                       
+if(index === player.index){
+                         
+ fill("black");
+textSize(25);
+text(allPlayers[plr].name ,x-25,y+25);
+
+                         
+ }
+                    
+textSize(25);
+fill("white");
+ text("Player 1 :" +allPlayers.player1.score,50,50);
+text("Player 2 :" + allPlayers.player2.score, 50, 100);
+                 
+}
                 
                 if(player.score>=5){
                     player.rank += 1;
-                    Player.updatePlayerAtEnd(player.rank);
-                    player.update();
-                    this.showRank();
-                 gameState = 2; 
+
+//Call the updatePlayerAtEnd() function in the play() of game.js
+Player.updatePlayerAtEnd(player.rank);
+    
+player.update();
+ this.showRank();
+gameState = 2; 
 
                 }
                  
@@ -120,18 +123,20 @@ class Game{
                               
                           }
                           
-                        }
+                      }
                   }
                 
 
          
          
         
-                
+         
+
     }
     showRank() {
-        swal({
-            title: `Awesome!${"\n"}Rank${"\n"}${player.rank}`,
+      //create swal function
+      swal({
+      title: `Awesome!${"\n"}Rank${"\n"}${player.rank}`,
             text: "You reached the finish line successfully",
             imageUrl:
               "https://raw.githubusercontent.com/vishalgaddam873/p5-multiplayer-car-race-game/master/assets/cup.png",
@@ -139,25 +144,6 @@ class Game{
             confirmButtonText: "Ok"
           });
         }
-            
 
 
-        gameOver() {
-           //display a text message
-           swal({
-               title:'Game Over',
-               text:"Oops!!! You lost the race",
-               imageUrl:
-               "https://cdn.shopify.com/s/files/1/1061/1924/products/Thumbs_Down_Sign_Emoji_Icon_ios10_grande.png",
-               imageSize:"100x100",
-               confirmButtonText:"Thanks For Playing"
-           })
-            }
-            
-            end(){
-               console.log("Game Ended");
-               console.log(player.rank)
-               //call the gameover function
-               this.gameOver();
-            }
-        }
+}
